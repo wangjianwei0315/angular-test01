@@ -1,0 +1,17 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+    <div style="display: flex;justify-content: space-between;">
+      <nz-upload nzAction="https://jsonplaceholder.typicode.com/posts/">
+        <button nz-button><i nz-icon nzType="upload"></i><span>点击上传</span></button>
+      </nz-upload>
+      <button (click)="add()" nz-button nzType="primary">新建</button>
+    </div>
+  </ng-template>
+</page-header>
+<nz-card>
+  <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
+  <st #st [data]="url" [columns]="columns"></st>
+</nz-card>
+<nz-modal nzIconType="circle" [(nzVisible)]="isVisible" [nzMaskClosable]="false" nzTitle="Import Notice" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <p style="font-weight: 700; font-size:20px;">Are you sure you want to delete this message ?</p>
+</nz-modal>

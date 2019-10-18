@@ -1,0 +1,4 @@
+<sf #sf mode="edit" [schema]="schema" [button]="null" [ui]="ui" (formSubmit)="formSubmit()">
+  <button [type]="'submit'" nz-button [disabled]="!sf.valid">提交</button>
+  <button (click)="sf.reset()" type="button" nz-button>重置</button>
+</sf>

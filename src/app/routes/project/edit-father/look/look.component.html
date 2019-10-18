@@ -1,0 +1,16 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" se-container gutter="24" size="compact" [labelWidth]="80">
+  <se label="用户名" error="请输入用户名！！！">
+    <input formControlName="userName" nz-input placeholder="用户名">
+  </se>
+  <se label="密码" error="请老实的输入密码！！！">
+    <input formControlName="password" nz-input type="password" placeholder="密码">
+  </se>
+  <se>
+    <button nz-button nzType="primary" [disabled]="!validateForm.valid">登录</button>
+  </se>
+</form>
+<h3>{{ type }}</h3>
+<qr [value]="value"></qr>
+<div>
+  <button *ngFor="let t of types" nz-button (click)="change(t)">{{ t }}</button>
+</div>

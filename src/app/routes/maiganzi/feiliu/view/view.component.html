@@ -1,0 +1,80 @@
+<nz-layout>
+  <nz-header style="background: #fff;">电子信息投资</nz-header>
+  <nz-content style="background: #fff;">
+    <div nz-menu nzTheme="light" nzMode="horizontal" style="display: flex;justify-content: space-around;">
+      <div nz-menu-item nzSelected>电话</div>
+      <div nz-menu-item>anything can be discovered</div>
+      <div nz-menu-item>企业注册商标</div>
+      <div nz-menu-item>企业社保编号</div>
+    </div>
+  </nz-content>
+  <nz-footer>
+    <div nz-typography nzCopyable [nzContent]="'借壳上市当有次一劫！'"></div>
+    <div nz-dropdown [nzDropdownMenu]="menu"  [nzTrigger]="'click'">
+      上市时间
+      <i nz-icon nzType="down"></i>
+    </div>
+    <nz-dropdown-menu #menu="nzDropdownMenu" style="width:150px;">
+      <ul nz-menu nzSelectable (nzClick)="change($event)">
+        <li nz-menu-item (click)="childClick($event)">2018-10-13</li>
+        <li nz-menu-item>2017-10-13</li>
+        <li nz-menu-item>2016-10-13</li>
+      </ul>
+    </nz-dropdown-menu>
+    <div style="display: flex;justify-content: flex-end;">
+      <nz-pagination [nzPageIndex]="1" [nzTotal]="50"></nz-pagination>
+    </div>
+    <div style="padding-top: 50px;">
+      <nz-steps [nzCurrent]="1" [nzStartIndex]="0">
+        <nz-step nzTitle="任务名称" nzDescription="计划名称"></nz-step>
+        <nz-step nzTitle="招标单位" nzDescription="计划编号"> </nz-step>
+        <nz-step nzTitle="采购方式" nzDescription="需求单位"></nz-step>
+        <nz-step nzTitle="招标担保人" nzDescription="计划填报人"></nz-step>
+        <nz-step nzTitle="ARE YOU READY ?" nzDescription="计划接收人"></nz-step>
+      </nz-steps>
+    </div>
+  </nz-footer>
+  <div>
+    <ul nz-menu [nzMode]="'vertical'" style="width: 240px;">
+      <li nz-submenu nzTitle="一级子菜单">
+        <ul>
+          <li nz-menu-item>二级菜单01</li>
+          <li nz-menu-item>耳机菜单02</li>
+          <li nz-submenu nzTitle="3级子菜单">
+            <ul>
+              <li nz-menu-item>桑级菜单</li>
+              <li nz-menu-item nzTitle="04级子菜单">
+                <ul>
+                  <li nz-menu-item>四级子菜单</li>
+                  <li nz-menu-item nzTitle="05级子菜单">
+                    <ul>
+                      <li nz-menu-item>五级菜单</li>
+                      <li nz-menu-item>五级菜单</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li nz-submenu nzTitle="一级子菜单">
+        <ul>
+          <li nz-menu-item>二级惨淡</li>
+          <li nz-menu-item>二级菜单</li>
+        </ul>
+      </li>
+      <li nz-menu-item>一级子菜单</li>
+    </ul>
+  </div>
+  <div>// 级联选择</div>
+  <div>
+    <nz-cascader [nzOptions]="nzOptions" [(ngModel)]="values" (ngModelChange)="onChanges($event)"></nz-cascader>
+  </div>
+  <div>
+    <label nz-checkbox (ngModelChange)="checkCallback($event)" [(ngModel)]="isChecked" [nzDisabled]="isCheckedButton">checked-enable</label>
+  </div>
+</nz-layout>
+<div class="modal-footer">
+  <button nz-button type="button" (click)="close()">关闭</button>
+</div>

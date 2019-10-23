@@ -7,22 +7,19 @@
   <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
   <st #st [data]="url" [columns]="columns"></st>
 </nz-card>
-<nz-layout>
-  <nz-header style="background: #fff;">
-    <ul nz-menu nzTheme="dark" nzMode="horizontal" style="background: white;">
-      <li nz-menu-item>menu01</li>
-      <li nz-menu-item nzSelected>menu02</li>
-      <li nz-menu-item>menu03</li>
-    </ul>
-  </nz-header>
-  <nz-layout>
-    <nz-sider>
-      <ul nz-menu>
-        <li nz-menu-item>sider01</li>
-        <li nz-menu-item>sider22</li>
-        <li nz-menu-item>sider333</li>
-      </ul>
-    </nz-sider>
-    <nz-content>right and middle</nz-content>
-  </nz-layout>
-</nz-layout>
+<nz-card>
+
+  <div *ngIf="!tenderCutStatus&&tenderStatus==='tenderOpen'">
+    <button (click)="add()"  nz-button [nzType]="'primary'" >
+      <span>添加供应商</span>
+    </button>
+  </div>
+
+  <div *ngIf="tenderCutStatus||tenderStatus!=='tenderOpen'">
+    <button  nz-button [nzType]="'primary'" disabled >
+      <span>添加供应商</span>
+    </button>
+  </div>
+
+  <st #st [data]="selectData" [columns]="columns1" [page]="pages"></st>
+</nz-card>

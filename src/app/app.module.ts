@@ -92,6 +92,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { RoutesModule } from './routes/routes.module';
 import { LayoutModule } from './layout/layout.module';
+import { ElModule } from 'element-angular'
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import { LayoutModule } from './layout/layout.module';
     CoreModule,
     SharedModule,
     LayoutModule,
+    ElModule.forRoot(),
     RoutesModule,
     ...I18NSERVICE_MODULES,
     ...FORM_MODULES,

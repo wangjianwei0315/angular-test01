@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Input, Output, } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
-import { STColumn, STComponent } from '@delon/abc';
+import {STColumn, STComponent, STPage} from '@delon/abc';
 import { SFSchema } from '@delon/form';
 import { ProjectEidtFatherLookComponent } from './look/look.component'
 import { ProjectEditFatherEditComponent } from './edit/edit.component'
@@ -24,6 +24,17 @@ export class ProjectEditFatherComponent implements OnInit {
       }
     }
   };
+  selectIndex = 0;
+  @Input() id=0;
+  // tslint:disable-next-line:no-output-native
+  @Output() submit= new EventEmitter();
+  selectData: any = [];
+  tenderCutStatus:boolean;
+  tenderStatus:string;
+  pages: STPage = {
+    total: '',// 分页显示多少条数据，字符串型
+    show: false,// 显示分页
+  };
   @ViewChild('st', { static: false }) st: STComponent;
   columns: STColumn[] = [
     { title: '项目编号', index: 'no' },
@@ -41,13 +52,24 @@ export class ProjectEditFatherComponent implements OnInit {
       ]
     }
   ];
+  columns1: STColumn[] = [
+    { title: '序号', type: 'no' },
+    { title: '供应商名称', index: 'name' },
+    { title: '联系人', index: 'contact' },
+    { title: '联系电话', index: 'mobile' },
+    { title: '保证金', index: 'marginStatusStr' },
+    { title: '投标状态', index: 'bidStatusStr' },
+    { title: '投标时间', index: 'bidTime' },
+    { title: '操作IP', index: 'operationIp' },
+  ];
+
 
   constructor(private http: _HttpClient, private modal: ModalHelper) { }
 
   ngOnInit() {
     this.http.get('/user').subscribe(res => {
       console.log(res)
-      let total = res.total + 1500
+      let total = res.total + 50
       const imgs = ['./assets/images/remind.jpg', './assets/images/remind.png']
       const arr = []
       for (; total >0; total--) {
@@ -59,7 +81,7 @@ export class ProjectEditFatherComponent implements OnInit {
           // buildImg: imgs[total % 2],
           buildImg: `./assets/tmp/img/bg${total % 10}.jpg`,
           buildArea: total + 2500,
-          tagPerson: '法外之域'
+          tagPerson: `审批人${total}`
         })
       }
       this.url = arr
@@ -67,6 +89,13 @@ export class ProjectEditFatherComponent implements OnInit {
     this.http.get('/user/current').subscribe(res => {
       console.log(res)
     })
+  }
+  findById(){
+    this.http.get(`/openBidding/findQualificationEvaluation`,{id: this.id,backCondition:'success'}).subscribe(res => {
+      this.selectData=res.tenderSupplierList;
+      this.tenderCutStatus=res.tenderCutStatus;
+      this.tenderStatus=res.openBiddingStatus;
+    });
   }
 
   add() {

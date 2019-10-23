@@ -15,6 +15,8 @@ export class ProjectEidtFatherLookComponent implements OnInit {
   type: any = '';
   value: any = '';
   types = ['url', 'email', 'tel', 'cn', 'vcard'];
+  src = './assets/images/01.png'
+  src01 = './assets/tmp/img/1.png'
 
   constructor(
     private modal: NzModalRef,
@@ -50,10 +52,10 @@ export class ProjectEidtFatherLookComponent implements OnInit {
         this.value = 'mailto:cipchk@qq.com';
         break;
       case 'tel':
-        this.value = 'tel:15900000000';
+        this.value = 'tel:15833267584';
         break;
       case 'cn':
-        this.value = '你好🇨🇳';
+        this.value = 'Funning CDN';
         break;
       case 'vcard':
         this.value = `BEGIN:VCARD

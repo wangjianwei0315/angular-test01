@@ -14,3 +14,7 @@
 <div>
   <button *ngFor="let t of types" nz-button (click)="change(t)">{{ t }}</button>
 </div>
+<button nz-button (click)="src='//a.com/1.png'">show the default picture</button>
+<div style="margin-top: 8px;">
+  <img [_src]="src" siz="128" [error]="src01">
+</div>

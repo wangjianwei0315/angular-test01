@@ -21,6 +21,7 @@ import { ProjectAutholizationComponent } from './autholization/autholization.com
 import { ProjectAutholizationCategoryComponent } from './autholization/category/category.component';
 import { ProjectCategoryEditComponent } from './category/edit/edit.component';
 import { ProjectAutholizationCategoryEditComponent } from './autholization/category/edit/edit.component';
+import { ProjectAutholizationCategoryAddComponent } from './autholization/category/add/add.component';
 
 const COMPONENTS = [
   ProjectPlanComponent,
@@ -40,7 +41,8 @@ const COMPONENTS_NOROUNT = [
   ProjectEidtFatherLookComponent,
   ProjectSupportEditComponent,
   ProjectSupportViewComponent,
-  ProjectAutholizationCategoryEditComponent];
+  ProjectAutholizationCategoryEditComponent,
+  ProjectAutholizationCategoryAddComponent];
 
 @NgModule({
   imports: [

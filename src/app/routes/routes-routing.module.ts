@@ -29,6 +29,8 @@ const routes: Routes = [
       // 业务子模块
       // { path: 'widgets', loadChildren: () => import('./widgets/widgets.module').then(m => m.WidgetsModule) },
       { path: 'maiganzi', loadChildren: './maiganzi/maiganzi.module#MaiganziModule' },
+      { path: 'examine', loadChildren: './examine/examine.module#ExamineModule' },
+      { path: 'template', loadChildren: './template/template.module#TemplateModule' },
     ]
   },
   // 全屏布局

@@ -1,0 +1,45 @@
+<div class="tags-container" flex-c>
+  <div class="start">开始</div>
+  <div flex-c *ngFor="let item of data">
+    <div flex-c *ngIf="data.length - item.index >= 0">
+      <span class="icon-line">
+        <span class="icon-add" (click)="createBox(item)">⊕</span>
+      </span>
+      <span class="icon-right">&gt;</span>
+    </div>
+    <div class="item">
+      <img src="./assets/images/07.png">
+      <div class="closeBox" flex-be>
+        <label nz-checkbox [(ngModel)]="item.isChecked">不可修改</label>
+        <div class="close" (click)="closeBox(item)">×</div>
+      </div>
+      <div class="content" flex-c>
+        <img src="./assets/images/01.png">
+        <span>{{item.text1 || '[未设置]'}}</span>
+      </div>
+      <div class="content" flex-c>
+        <img src="./assets/images/01.png">
+        <span>{{item.text2 || '[未设置]'}}</span>
+      </div>
+    </div>
+    <div flex-c *ngIf="data.length === item.index + 1">
+      <span class="icon-line">
+        <span class="icon-add" (click)="createBox(item)">⊕</span>
+      </span>
+      <span class="icon-right">&gt;</span>
+    </div>
+  </div>
+  <div class="end">结束</div>
+</div>
+<!--提示对话框-->
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="提示"
+  nzWidth="300"
+  (nzOnCancel)="isVisible = false"
+  (nzOnOk)="handleOk()"
+>
+  <p>确定要删除此内容么？</p>
+</nz-modal>
+
+

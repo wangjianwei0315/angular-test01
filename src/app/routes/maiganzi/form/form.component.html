@@ -1,0 +1,28 @@
+<page-header></page-header>
+<!--单选框-->
+<nz-radio-group [(ngModel)]="radioValue" [nzName]="'radioGroup'" (ngModelChange)="radioChange($event)">
+  <label nz-radio nzValue="A">A</label>
+  <label nz-radio nzValue="B">B</label>
+  <label nz-radio nzValue="C">C</label>
+  <label nz-radio nzValue="D">D</label>
+</nz-radio-group>
+<label nz-radio ngModel>radio</label>
+<!--评分-->
+<nz-rate [ngModel]="checkedStar" nzAllowHalf [nzCount]="8" (ngModelChange)="starChange($event)"></nz-rate>
+<nz-row>
+  <nz-col [nzSpan]="12">
+    <nz-slider [nzMin]="0" [nzMax]="100" [(ngModel)]="slider01" [nzStep]="0.5"></nz-slider>
+  </nz-col>
+  <div nz-col [nzSpan]="4">
+    <nz-input-number [nzMin]="0" [nzMax]="100" [nzStep]="0.5" [(ngModel)]="slider01"></nz-input-number>
+  </div>
+</nz-row>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submit()" se-container gutter="24" size="compact" [labelWidth]="80">
+  <se label="邮箱" error="please input your email">
+    <input type="text" formControlName="userName" nz-input placeholder="your email">
+  </se>
+  <se label="手机号码" erro="please input your cellphone">
+    <input type="number" nz-input formControlName="cellphone" placeholder="cellphone">
+  </se>
+</form>
+

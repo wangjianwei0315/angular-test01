@@ -1,0 +1,36 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+  </ng-template>
+</page-header>
+<nz-card>
+  <div class="left-layout">
+    <div class="left-tree">
+      <nz-tree [nzData]="supplierType"
+               nzAsyncData
+               (nzClick)="setUserSupplier($event)">
+      </nz-tree>
+    </div>
+    <div class="left-content">
+
+      <div style="float: left;padding: 4px">
+        <div *ngIf="supplierStatus === 'audit'&&auditStatus==='wait'">
+          <button (click)="auditBasicInfo()"  nz-button [nzType]="'primary'">
+            <span>核查资质</span>
+          </button>
+        </div>
+
+        <div *ngIf="supplierStatus !== 'audit'&&supplierStatus!==''&&basicInfoStatus==='audit'">
+          <button (click)="auditBasicInfo()"  nz-button [nzType]="'primary'">
+            <span>修改信息审核</span>
+          </button>
+        </div>
+      </div>
+      <sf mode="search" [schema]="searchSchema"
+          (formSubmit)="formSearch($event)"
+          (formReset)="formReset($event)">
+      </sf>
+
+      <st #st [data]="url" [columns]="columns" (change)="change($event)"></st>
+    </div>
+  </div>
+</nz-card>

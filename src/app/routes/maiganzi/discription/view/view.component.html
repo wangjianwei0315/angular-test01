@@ -1,0 +1,22 @@
+<nz-descriptions nzTitle="Description" nzBordered>
+  <nz-descriptions-item nzTitle="Cloud Mark">Clout Description</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Loading Time">Timing Function</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Discount">$1600,205</nz-descriptions-item>
+  <nz-descriptions-item nzTitle="user Span" [nzSpan]="nzSpan">
+    2018-04-24 18:00:00 To 2019-04-24 18:00:00
+  </nz-descriptions-item>
+  <nz-descriptions-item nzTitle="Update Description description"></nz-descriptions-item>
+</nz-descriptions>
+<nz-affix nzOffsetTop="0" (nzChange)="ngChange($event)">
+  <button nz-button [nzType]="'primary'">
+    <span>固定到顶部</span>
+  </button>
+</nz-affix>
+<br />
+<nz-affix nzOffsetBottom="0">
+  <button nz-button [nzType]="'primary'">
+    <span>底部固定</span>
+  </button>
+</nz-affix>
+
+

@@ -1,0 +1,8 @@
+<nz-card>
+  <div style="margin-bottom: 20px;">
+    <button nz-button [nzType]="'primary'" (click)="add()">新建文件</button>
+    <button nz-button [nzType]="'link'">编辑</button>
+  </div>
+  <st #st [data]="data" [columns]="columns" [page]="pages"></st>
+</nz-card>
+

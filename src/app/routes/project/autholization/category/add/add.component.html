@@ -1,0 +1,27 @@
+<page-header [action]="phActionTpl">
+  <ng-template #phActionTpl>
+  </ng-template>
+
+    <nz-tabset [nzSize]="'default'" [(nzSelectedIndex)]="selectIndex">
+      <nz-tab [nzTitle]="item.title" *ngFor="let item of tabs" (nzClick)="tabTo(item)"></nz-tab>
+    </nz-tabset>
+</page-header>
+<nz-card>
+
+
+  <div *ngIf="!tenderCutStatus&&tenderStatus==='tenderOpen'">
+    <button (click)="add()"  nz-button [nzType]="'primary'" >
+      <span>添加供应商</span>
+    </button>
+  </div>
+
+  <div *ngIf="tenderCutStatus||tenderStatus!=='tenderOpen'">
+    <button  nz-button [nzType]="'primary'" disabled >
+      <span>添加供应商</span>
+    </button>
+  </div>
+
+  <st #st [data]="selectData" [columns]="columns" [page]="pages"></st>
+
+
+</nz-card>

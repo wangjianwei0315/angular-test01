@@ -1,0 +1,13 @@
+<div class="modal-header">
+  人员信息
+</div>
+<div class="modal-content">
+  <div></div>
+  <st #st [columns]="columns" [data]="url" [pi]="3" [ps]="5"></st>
+</div>
+<sv-container>
+  <sv label="facebook">一个非死不可的网站</sv>
+  <sv label="microsoft"> a company who make and develop software</sv>
+  <sv label="never"> something you can't see forever</sv>
+  <sv *ngFor="let item of svData" label="item.index">{{item.text}}</sv>
+</sv-container>

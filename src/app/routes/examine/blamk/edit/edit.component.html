@@ -1,0 +1,10 @@
+<div class="modal-header">
+  <div class="modal-title">编辑</div>
+</div>
+<div class="ugc-head-query">
+  <button nz-button [nz-tooltip]="'submit'" (click)="save()">保存</button>
+</div>
+<sf #sf mode="edit" [schema]="schema" button="none" [formData]="formdata" [ui]="ui"></sf>
+<div class="modal-footer">
+  <button nz-button nzType="default" (click)="close()">关闭</button>
+</div>

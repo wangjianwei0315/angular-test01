@@ -1,8 +1,86 @@
 :host {
   ::ng-deep {
-    .ant-modal-content {
-      .ant-modal-close {
-        top: -10px;
+    .modal-header {
+      justify-content: flex-start;
+    }
+    .tags-container {
+      .item {
+        width: 200px;
+        padding: 10px;
+        height: 140px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        border: 2px solid #c6c6c6;
+        position: relative;
+        background: linear-gradient(top, #fff9f0, #fffcac);
+        background: -webkit-linear-gradient(top, #fff9f0, #fffead);
+        >div {
+          line-height: 30px;
+        }
+        >img {
+          position: absolute;
+          width: 12px;
+          height: 12px;
+          right: 10px;
+          bottom: 10px;
+          cursor: pointer;
+        }
+        .closeBox {
+          .close {
+            color: #f70603;
+            font-size: 24px;
+            margin-top: -8px;
+          }
+        }
+        .content {
+          margin-top: 4px;
+          margin-bottom: 12px;
+          padding-left: 20px;
+          font-size: 18px;
+          img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+          }
+          span {
+            flex: 1;
+            text-align: center;
+          }
+        }
+      }
+      .icon-line {
+        background: #ccc;
+        width: 60px;
+        height: 2px;
+        position:relative;
+        .icon-add {
+          position: absolute;
+          left: 22px;
+          top: -20px;
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+        }
+      }
+      .icon-right {
+        color:#e2e2e2;
+        margin-left: -4px;
+        margin-top: -2px;
+        font-size: 20px;
+      }
+      .start, .end {
+        width: 120px;
+        min-width:120px !important;
+        height: 52px;
+        text-align: center;
+        line-height: 52px;
+        border-radius: 50% 50% 50% 50%;
+      }
+      .start {
+        background: skyblue;
+      }
+      .end {
+        background: #ff04aa;
       }
     }
   }

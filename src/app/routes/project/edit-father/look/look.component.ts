@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
-import { _HttpClient } from '@delon/theme';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild, EventEmitter, Input, Output } from '@angular/core';
+import { _HttpClient, ModalHelper } from '@delon/theme';
+import { NzMessageService } from 'ng-zorro-antd';
+import * as Http from 'http';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-project-eidt-father-look',
@@ -9,68 +11,89 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./look.component.less']
 })
 export class ProjectEidtFatherLookComponent implements OnInit {
-  record: any = {};
-  i: any;
-  validateForm: FormGroup;
-  type: any = '';
-  value: any = '';
-  types = ['url', 'email', 'tel', 'cn', 'vcard'];
-  src = './assets/images/01.png'
-  src01 = './assets/tmp/img/1.png'
+  data: any[] = [
+    { id: 0, children: [
+        { isChecked: true, post: '大唐天子', person: '张飞', index:0, canEdit: true },
+        { isChecked: true, post: '', person: '张飞', index:1, canEdit: false },
+        { isChecked: true, post: '', person: '张飞', index:2, canEdit: true },
+        { isChecked: true, post: '大唐天子', person: '', index:3, canEdit: true },
+      ]},
+    { id:1, children: [
+        { isChecked: true, post: '瓦岗第一霸', person: '板三', index:0, canEdit: false },
+        { isChecked: true, post: '', person: '张三', index:1, canEdit: true },
+      ]},
+    { id: 2, children: [
+        { isChecked: true, post: '白领', person: '李白', index:0, canEdit: false },
+        { isChecked: true, post: '圣人', person: '孔子', index:1, canEdit: false },
+        { isChecked: true, post: '英雄', person: '岳飞', index:2, canEdit: true }
+      ]},
+    { id: 3}
+  ];
+  element: any;
+  isVisible = false;
+  isVisible01 = false;
+  nameText = '';
+  editPoint: any;
 
-  constructor(
-    private modal: NzModalRef,
-    public msg: NzMessageService,
-    public http: _HttpClient,
-    fb: FormBuilder
-  ) {
-    this.validateForm = fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [false],
-    });
+  constructor(private tt: HttpClient, private http: _HttpClient, private modal: ModalHelper, public msg: NzMessageService) { }
+
+  ngOnInit() {
+    this.data.map(item => {
+      if (!item.children) item.children = []
+    })
   }
 
-  ngOnInit(): void {
-    this.change('url')
-    this.http.get(`/user/${this.record.id}`).subscribe(res => this.i = res);
+  handleOk() {
+    const { item, val } = this.element
+    const index = val.index
+    item.children.map(i => {
+      if (i.index >= index) i.index--
+    })
+    item.children.splice(index, 1)
+    this.msg.info('删除成功')
+    this.isVisible = false;
+    console.log(this.data)
+    this.data.map((i, num) => {
+      if(!i.children.length) {
+        this.data.splice(num, 1)
+      }
+    })
   }
-
-  close() {
-    this.modal.destroy();
+  // 开始 右侧的新增
+  startCreate() {
+    this.data.unshift({
+      id:Math.random(),
+      children: [
+        { isChecked: Boolean, post: '', person: '', index:0 }
+      ]
+    })
   }
-  submitForm() {
-    this.msg.success(JSON.stringify(this.validateForm.value));
+  // 横向新增
+  createBox(item) {
+    const index = this.data.findIndex(val => val.id === item.id)
+    this.data.splice(index + 1, 0, { id: Math.random(), children: [{ isChecked: Boolean, post: '', person: '', index: 0, canEdit: true }]})
   }
-  change(type: string) {
-    this.type = type;
-    switch (type) {
-      case 'url':
-        this.value = 'https://ng-alain.com/';
-        break;
-      case 'email':
-        this.value = 'mailto:cipchk@qq.com';
-        break;
-      case 'tel':
-        this.value = 'tel:15833267584';
-        break;
-      case 'cn':
-        this.value = 'Funning CDN';
-        break;
-      case 'vcard':
-        this.value = `BEGIN:VCARD
-              VERSION:4.0
-              N:色;卡;;Mr.;
-              FN:卡色
-              ORG:NG-ALAIN
-              TITLE:NG-ALAIN
-              PHOTO;MEDIATYPE=image/svg:https://ng-alain.com/assets/img/logo-color.svg
-              TEL;TYPE=work,voice;VALUE=uri:tel:15900000000
-              ADR;TYPE=WORK;PREF=1;LABEL="中国上海":;;上海;中国
-              EMAIL:cipchk@qq.com
-              x-qq:94458893
-              END:VCARD`;
-        break;
-    }
+  // 纵向新增
+  createY(item, val) {
+    const child = item.children
+    child.map(i => {
+      if (i.index >= val.index) i.index++
+    })
+    child.splice(val.index, 0, { isChecked: Boolean, post: '', person: '', index: val.index, canEdit: true })
+    console.log(child)
+  }
+  // 删除
+  del(item, val) {
+    this.isVisible = true;
+    this.element = { item, val }
+  }
+  edit(item, value) {
+    this.isVisible01 = true;
+    this.nameText = value;
+    this.editPoint = item
+  }
+  handle01() {
+    this.isVisible01 = false;
+    this.editPoint.post = this.nameText
   }
 }

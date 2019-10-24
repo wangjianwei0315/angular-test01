@@ -1,20 +1,76 @@
-<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" se-container gutter="24" size="compact" [labelWidth]="80">
-  <se label="用户名" error="请输入用户名！！！">
-    <input formControlName="userName" nz-input placeholder="用户名">
-  </se>
-  <se label="密码" error="请老实的输入密码！！！">
-    <input formControlName="password" nz-input type="password" placeholder="密码">
-  </se>
-  <se>
-    <button nz-button nzType="primary" [disabled]="!validateForm.valid">登录</button>
-  </se>
-</form>
-<h3>{{ type }}</h3>
-<qr [value]="value"></qr>
-<div>
-  <button *ngFor="let t of types" nz-button (click)="change(t)">{{ t }}</button>
+<div class="modal-header">
+  <div>模板编辑</div>
 </div>
-<button nz-button (click)="src='//a.com/1.png'">show the default picture</button>
-<div style="margin-top: 8px;">
-  <img [_src]="src" siz="128" [error]="src01">
-</div>
+<nz-layout>
+  <nz-content>
+    <div class="tags-container" flex-c>
+      <div class="start f18">开始</div>
+      <div flex-c>
+        <div flex-c>
+          <div class="icon-line">
+            <img class="icon-add" src="./assets/images/add.png" (click)="startCreate()">
+          </div>
+          <span class="icon-right">&gt;</span>
+        </div>
+        <div flex-c *ngFor="let item of data">
+          <div *ngIf="item.children.length" flex-c>
+            <div style="display: flex;flex-direction: column; justify-content: center; align-items: center;">
+              <div class="item" *ngFor="let val of item.children" style="margin-top: 10px;">
+                <img *ngIf="val.canEdit" src="./assets/images/07.png" (click)="createY(item, val)">
+                <div class="closeBox" flex-be>
+                  <label nz-checkbox [(ngModel)]="val.isChecked">不可修改</label>
+                  <div *ngIf="val.canEdit" class="close" (click)="del(item ,val)">×</div>
+                </div>
+                <div class="content" flex-c>
+                  <img src="./assets/images/work.png" (click)="edit(val, val.post)">
+                  <span>{{val.post || '[未设置]'}}</span>
+                </div>
+                <div class="content" flex-c>
+                  <img src="./assets/images/header.png" (click)="edit(val, val.person)">
+                  <span>{{val.person || '[未设置]'}}</span>
+                </div>
+              </div>
+            </div>
+            <div flex-c>
+              <div class="icon-line">
+                <img class="icon-add" src="./assets/images/add.png" (click)="createBox(item)">
+              </div>
+              <span class="icon-right">&gt;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="end f18">结束</div>
+    </div>
+    <svg width="100%" height="100%" version="1.1"
+         xmlns="http://www.w3.org/2000/svg">
+      <rect style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0.5);" x="190" y="258" width="198" height="138" r="3" rx="3" ry="3" fill="#ffffff" stroke="#cccccc"></rect>
+    </svg>
+    <!--删除提示对话框-->
+    <nz-modal
+      [(nzVisible)]="isVisible"
+      nzTitle="提示"
+      nzWidth="300"
+      (nzOnCancel)="isVisible = false"
+      (nzOnOk)="handleOk()"
+    >
+      <p>确定要删除此内容么？</p>
+    </nz-modal>
+    <!--职位编辑框-->
+    <nz-modal
+      [(nzVisible)]="isVisible01"
+      nzTitle="职位信息"
+      nzMaskClosable="false"
+      nzWidth="300"
+      (nzOnCancel)="isVisible01 = false"
+      (nzOnOk)="handle01()"
+    >
+      <div>
+        <div style="line-height: 40px;">请输入职位</div>
+        <input type="text" nz-input [(ngModel)]="nameText">
+      </div>
+    </nz-modal>
+  </nz-content>
+</nz-layout>
+
+

@@ -44,7 +44,7 @@
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "@types/jquery": "^3.3.31",
-    "ajv": "^6.10.2",
+    "ajv": "^6.12.3",
     "bootstrap": "^3.4.1",
     "element-angular": "^0.7.6",
     "element-ui": "^2.12.0",
